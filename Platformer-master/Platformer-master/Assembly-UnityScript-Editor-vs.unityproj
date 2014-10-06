@@ -50,8 +50,13 @@
      <Compile Include="Assets\Sample Assets\Effects\Light Shafts\Editor\LightShaftsEditor.js" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Sample Assets\Prototyping\Shaders\WorldCoord Diffuse.shader" />
+     <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\VertexBillboard.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\SamplePositions.shader" />
+     <None Include="Assets\ProCore\Shared\About\README.txt" />
      <None Include="Assets\Sample Assets\Effects\Image Effects (Pro Only)\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
      <None Include="Assets\Sample Assets\Effects\Tessellation Shaders\Shaders\BumpedSpecularSmooth.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Shared.cginc" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Coord.shader" />
@@ -66,16 +71,20 @@
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Alpha.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Particle Systems Guidelines.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\UnlitColor.shader" />
      <None Include="Assets\Sample Assets\Cross Platform Input\Cross Platform Input Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Add (Soft).shader" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\Sample Assets\Effects\Shaders\Mobile-Spec.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Car\Car Guidelines.txt" />
      <None Include="Assets\Sample Assets\Characters\Third Person Character\Third Person Character Guidelines.txt" />
      <None Include="Assets\Sample Assets\Cameras\Camera Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Raymarch.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\UnlitColor-Overlay.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\FinalInterpolation.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
      <None Include="Assets\Sample Assets\Characters\First Person Character\First Person Character Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Depth.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Rolling Ball\Rolling Ball Guidelines.txt" />
@@ -83,8 +92,24 @@
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Add.shader" />
      <None Include="Assets\Sample Assets\Effects\Tessellation Shaders\Shaders\BumpedSpecularDisplacement.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\ColorFilter.shader" />
+     <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="Assembly-UnityScript">
  <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderCore">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderEditor">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Prototype/Editor/ProBuilderEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="ProCore">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ </Reference>
+ <Reference Include="SixBySeven">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Shared/Code/SixBySeven.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

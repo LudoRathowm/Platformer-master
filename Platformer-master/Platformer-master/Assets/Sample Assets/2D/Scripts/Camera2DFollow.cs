@@ -23,7 +23,10 @@ public class Camera2DFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		GameObject otarget = GameObject.FindGameObjectWithTag("Player");
+		if (otarget)
+		target = otarget.transform;
+		if (target){
 		// only update lookahead pos if accelerating or changed direction
 		float xMoveDelta = (target.position - lastTargetPosition).x;
 
@@ -40,6 +43,6 @@ public class Camera2DFollow : MonoBehaviour {
 		
 		transform.position = newPos;
 		
-		lastTargetPosition = target.position;		
+			lastTargetPosition = target.position;}		
 	}
 }

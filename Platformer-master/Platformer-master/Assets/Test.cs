@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Test : MonoBehaviour {
+	bool d1 = false;
+	bool d2 = false;
 	public string SkillUsed;
 	public bool punch;
 	public bool frontal;
@@ -45,12 +47,20 @@ public class Test : MonoBehaviour {
 		}
 
 		if (falconPunch.Check())
-		{SkillUsed = "punch";
+		{if (d1== false){
+				Debug.Log ("Punch Used");
+				d1 = true;}
+			SkillUsed = "punch";
+
 			skilltimer = 0.15f;
-		}		
+				}
 		if (falconKick.Check())
-		{SkillUsed = "frontal";
-			skilltimer = 0.15f;
+		{if (d2 == false){
+				d2 = true;
+				Debug.Log ("Kick Used");}
+			SkillUsed = "low";
+
+			skilltimer = 0.13f;
 		}
 		if (topblock.Check())
 		{
@@ -58,7 +68,7 @@ public class Test : MonoBehaviour {
 			}
 	}
 
-void	topBlock(){
+  void	topBlock(){
 		//Debug.Log ("Blocked high attack");
 		animator.SetTrigger("topblock");
 		isTopBlocking = true;

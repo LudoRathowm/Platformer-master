@@ -47,15 +47,27 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Bulleteffect.cs" />
+     <Compile Include="Assets\CheckForObstacle.cs" />
+     <Compile Include="Assets\CheckGround.cs" />
+     <Compile Include="Assets\DropSword.cs" />
      <Compile Include="Assets\EnemyHealth.cs" />
      <Compile Include="Assets\FeetThrust.cs" />
      <Compile Include="Assets\FreedomBullet.cs" />
+     <Compile Include="Assets\Frontslash.cs" />
+     <Compile Include="Assets\Gravity.cs" />
+     <Compile Include="Assets\GravityControl.cs" />
+     <Compile Include="Assets\GroundCheckRayCast.cs" />
+     <Compile Include="Assets\JellyAI.cs" />
      <Compile Include="Assets\JumpyEnemy.cs" />
      <Compile Include="Assets\KeyCombo.cs" />
+     <Compile Include="Assets\KillPlayer.cs" />
      <Compile Include="Assets\MoveTrail.cs" />
      <Compile Include="Assets\Parallaxing.cs" />
      <Compile Include="Assets\PlayerAttackColliders.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
+     <Compile Include="Assets\ProCore\Prototype\Scripts\RebuildMeshOnWake.cs" />
+     <Compile Include="Assets\Respawner.cs" />
+     <Compile Include="Assets\Rope2D.cs" />
      <Compile Include="Assets\Sample Assets\2D\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\Sample Assets\2D\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Sample Assets\2D\Scripts\Platformer2DUserControl.cs" />
@@ -154,10 +166,20 @@
      <Compile Include="Assets\TopSlash.cs" />
      <Compile Include="Assets\Victory.cs" />
      <Compile Include="Assets\Weapon.cs" />
+     <Compile Include="Assets\YouWin.cs" />
+     <Compile Include="Assets\cameraspin.cs" />
+     <Compile Include="Assets\jellyhigh.cs" />
+     <Compile Include="Assets\jellylong.cs" />
+     <Compile Include="Assets\jellylow.cs" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Sample Assets\Prototyping\Shaders\WorldCoord Diffuse.shader" />
+     <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\VertexBillboard.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\SamplePositions.shader" />
+     <None Include="Assets\ProCore\Shared\About\README.txt" />
      <None Include="Assets\Sample Assets\Effects\Image Effects (Pro Only)\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
      <None Include="Assets\Sample Assets\Effects\Tessellation Shaders\Shaders\BumpedSpecularSmooth.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Shared.cginc" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Coord.shader" />
@@ -172,16 +194,20 @@
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Alpha.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Particle Systems Guidelines.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\UnlitColor.shader" />
      <None Include="Assets\Sample Assets\Cross Platform Input\Cross Platform Input Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Add (Soft).shader" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Sample Assets\Effects\Toon Shading\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\Sample Assets\Effects\Shaders\Mobile-Spec.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Car\Car Guidelines.txt" />
      <None Include="Assets\Sample Assets\Characters\Third Person Character\Third Person Character Guidelines.txt" />
      <None Include="Assets\Sample Assets\Cameras\Camera Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Raymarch.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\UnlitColor-Overlay.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\FinalInterpolation.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
      <None Include="Assets\Sample Assets\Characters\First Person Character\First Person Character Guidelines.txt" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Depth.shader" />
      <None Include="Assets\Sample Assets\Vehicles\Rolling Ball\Rolling Ball Guidelines.txt" />
@@ -189,6 +215,19 @@
      <None Include="Assets\Sample Assets\Effects\Particle Systems\Shaders\Priority Particle Add.shader" />
      <None Include="Assets\Sample Assets\Effects\Tessellation Shaders\Shaders\BumpedSpecularDisplacement.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\ColorFilter.shader" />
+     <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
+ <Reference Include="ProBuilderCore">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps.dll</HintPath>
+ </Reference>
+ <Reference Include="ProCore">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ </Reference>
+ <Reference Include="SixBySeven">
+ <HintPath>C:/Users/Marco/Desktop/Platformer-master/Platformer-master/Platformer-master/Assets/ProCore/Shared/Code/SixBySeven.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

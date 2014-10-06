@@ -6,7 +6,7 @@ public class TopSlash : MonoBehaviour {
 	PolygonCollider2D thiscollider;
 	void OnTriggerEnter2D(Collider2D other) {
 				if (!entered) {
-						Debug.Log ("HIT THE TOP");
+					//	Debug.Log ("HIT THE TOP");
 			entered = true;
 		}
 		}
