@@ -6,7 +6,10 @@ public class Frontslash : MonoBehaviour {
 	PolygonCollider2D thiscollider;
 	void OnTriggerEnter2D(Collider2D other) {
 		if (!entered && other.gameObject.CompareTag("Enemy")) {
-				Debug.Log ("hit you");
+			bool guarded = other.gameObject.GetComponent<JellyAI>().isguarding;
+			if (guarded)
+				Debug.Log ("GUARDED");
+			else Debug.Log ("NOT GUARDED, YOU HIT");
 			entered = true;
 		}
 	}

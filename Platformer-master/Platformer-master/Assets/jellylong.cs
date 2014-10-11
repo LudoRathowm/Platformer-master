@@ -6,7 +6,7 @@ public class jellylong : MonoBehaviour {
 	PolygonCollider2D thiscollider;
 	void OnTriggerEnter2D(Collider2D other) {
 		if (!entered && other.gameObject.CompareTag("Player") ) {
-				Debug.Log ("HIT THE PLAYER");
+		
 			entered = true;
 		}
 	}
