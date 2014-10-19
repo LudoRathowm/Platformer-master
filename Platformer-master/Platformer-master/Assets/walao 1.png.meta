@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: c8d5385c0673f4644bf0bb874092b333
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: walao 1_32
+    21300002: walao 1_33
+    21300004: walao 1_34
+    21300006: walao 1_35
+    21300008: walao 1_36
+    21300010: walao 1_37
+    21300012: walao 1_41
+    21300014: walao 1_42
+    21300016: walao 1_43
+    21300018: walao 1_47
+    21300020: walao 1_48
+    21300022: walao 1_49
+    21300024: walao 1_50
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 33
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: walao 1_32
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 635
+        width: 58
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_33
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 632
+        width: 57
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_34
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 635
+        width: 72
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_35
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 644
+        width: 83
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_36
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 650
+        width: 83
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_37
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 617
+        width: 83
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_41
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 347
+        width: 95
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_42
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 353
+        width: 96
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_43
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 354
+        width: 164
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_47
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 78
+        width: 92
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_48
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 64
+        width: 93
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_49
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 58
+        width: 163
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walao 1_50
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 211
+        width: 164
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

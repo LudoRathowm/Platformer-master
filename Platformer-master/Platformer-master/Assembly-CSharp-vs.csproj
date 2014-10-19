@@ -58,6 +58,7 @@
      <Compile Include="Assets\GravityControl.cs" />
      <Compile Include="Assets\GroundCheckRayCast.cs" />
      <Compile Include="Assets\JellyAI.cs" />
+     <Compile Include="Assets\JellySpitter.cs" />
      <Compile Include="Assets\JumpyEnemy.cs" />
      <Compile Include="Assets\KeyCombo.cs" />
      <Compile Include="Assets\KillPlayer.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Parallaxing.cs" />
      <Compile Include="Assets\PlayerAttackColliders.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
+     <Compile Include="Assets\PlayerScript.cs" />
      <Compile Include="Assets\ProCore\Prototype\Scripts\RebuildMeshOnWake.cs" />
      <Compile Include="Assets\Respawner.cs" />
      <Compile Include="Assets\Rope2D.cs" />
@@ -161,6 +163,7 @@
      <Compile Include="Assets\Sample Assets\Vehicles\Car\Scripts\Wheel.cs" />
      <Compile Include="Assets\Sample Assets\Vehicles\Rolling Ball\Scripts\Ball.cs" />
      <Compile Include="Assets\Sample Assets\Vehicles\Rolling Ball\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\Spit.cs" />
      <Compile Include="Assets\Test.cs" />
      <Compile Include="Assets\Tiling.cs" />
      <Compile Include="Assets\TopSlash.cs" />

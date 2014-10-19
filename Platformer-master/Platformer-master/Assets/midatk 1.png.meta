@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 749e271ea23aeb145982d5bcea886df7
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: midatk 1_0
+    21300002: midatk 1_1
+    21300004: midatk 1_2
+    21300006: midatk 1_3
+    21300008: midatk 1_4
+    21300010: midatk 1_5
+    21300012: spit
+    21300014: midatk 1_7
+    21300016: midatk 1_8
+    21300018: midatk 1_9
+    21300020: midatk 1_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 33
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: midatk 1_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 423
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 424
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 424
+        width: 93
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_3
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 427
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 223
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_5
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 192
+        width: 127
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spit
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 298
+        width: 25
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_7
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 210
+        width: 237
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_8
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 303
+        width: 25
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_9
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 2
+        width: 291
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: midatk 1_10
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 89
+        width: 25
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

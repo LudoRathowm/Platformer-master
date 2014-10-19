@@ -30,12 +30,12 @@ public class JellyAI : MonoBehaviour {
 	[SerializeField] float jumpForce = 0.075f;
 	bool needtorun;
 	public bool isguarding;
-	const int shortmelee = 3;
-	const int longmelee = 6;
+	const int shortmelee = 2;
+	const int longmelee = 10;
 	public bool islowhealth = false;
 	float distx;
 	float disty;
-	float myheight = 0.5f; //how big taller the mob is compared to the player to prevent bugs with youaretoohigh
+	float myheight = 1.6f; //how big taller the mob is compared to the player to prevent bugs with youaretoohigh
 	float myfat = 2.3f; //how big the hitbox of the mob is, to avoid getting stuck on platforms to move a bit extra
 	bool toohighright;
 	bool toohighleft;
@@ -52,7 +52,7 @@ public class JellyAI : MonoBehaviour {
 	float dist;
 	bool grounded;
 	int AwakeDistance = 20;
-	public string targetStatus;
+	string targetStatus;
 	RaycastHit2D walao;
 	float halfdistanceheight;
 	float halfdistance;
@@ -82,7 +82,7 @@ public class JellyAI : MonoBehaviour {
 	}
 	
 	private IEnumerator FSM(){
-		while (_alive){Debug.Log(_state);
+		while (_alive){
 			switch (_state) {
 			case State.Initialization:
 				Init ();
@@ -111,12 +111,11 @@ public class JellyAI : MonoBehaviour {
 				Pickattack();
 				break;
 			case State.AttackFront:
-				cFrontattack();
-				yield return new WaitForSeconds(0.3f);
-				Frontattack();
-				yield return new WaitForSeconds(0.2f);
-				pFrontattack();
-				_state =JellyAI.State.PickAction;
+				anim.SetBool("midspit",true);
+				yield return new WaitForSeconds(0.4f);               
+				GetComponentInChildren<JellySpitter>().shoot = true;
+				anim.SetBool("midspit",false);
+				_state = JellyAI.State.PickAction;
 				break;
 			case State.AttackLow:
 				cLowattack();
@@ -136,8 +135,10 @@ public class JellyAI : MonoBehaviour {
 				break;
 			case State.Guard:
 				isguarding = true;
+				anim.SetBool("defending", true);
 				//anim.blabla guarding animation i wish i had it
 				yield return new WaitForSeconds (0.5f);
+				anim.SetBool("defending", false);
 				isguarding = false;
 				_state = JellyAI.State.PickAction;
 				break;                 
@@ -222,6 +223,7 @@ public class JellyAI : MonoBehaviour {
 
 		if (distx > 0 && distx<AADistance && grounded) 
 		if (target != _home ){
+
 			_state = JellyAI.State.PickAction;}
 		else {
 			
@@ -230,6 +232,7 @@ public class JellyAI : MonoBehaviour {
 		}
 		if (distx <0 && distx> -AADistance && grounded) {
 			if (target != _home ){
+
 				_state = JellyAI.State.PickAction;}
 			else {
 				
@@ -264,8 +267,9 @@ public class JellyAI : MonoBehaviour {
 		
 	}
 	private void PickAction(){
-		anim.SetFloat("Speed",0);
 
+		anim.SetFloat("Speed",0);
+		targetStatus = target.gameObject.GetComponent<PlayerAttackColliders>().Status4Mob;
 		//ALL THE STUFF FOR POSITIONING,ETC NOT ACTUAL ACTION PICKING
 		if (Physics2D.Raycast(transform.position,Vector3.down, halfdistanceheight + 0.1f, mask))
 			grounded = true;
@@ -291,12 +295,12 @@ public class JellyAI : MonoBehaviour {
 		
 		disty =  (target.transform.position.y - _myTransform.position.y);
 		
-		if (disty < 0  && distx > 0 || distx < 0)
+		if (disty < -1.6f  && distx > 0 || disty < -1.6f && distx < 0)
 			youaretoohigh = true;
 		
 		//CHECK THE DIRECTION OF THE PLAYER AND THEN DECIDE IF YOU WANT TO DODGE A LOWHIT
-		targetStatus = target.gameObject.GetComponent<PlayerAttackColliders>().Status4Mob;
-		playerturn = target.gameObject.GetComponent<PlatformerCharacter2D>().turnright;
+
+		playerturn = target.gameObject.GetComponent<PlayerScript>().turnright;
 		if (targetStatus == "LowSlash" && playerturn == 1 && distx < 0 && !youaretoohigh)
 			_state = JellyAI.State.AvoidLow;
 		if (targetStatus == "LowSlash" && playerturn == -1 && distx > 0 && !youaretoohigh)
@@ -304,10 +308,13 @@ public class JellyAI : MonoBehaviour {
 		
 		
 		//IF LOW ON HP, CHANGE AA DISTANCE
-		if (islowhealth && AADistance != longmelee)		
+		if (islowhealth && AADistance != longmelee)	 {	
 			AADistance = longmelee;
-		else if (!islowhealth)              
-			AADistance = shortmelee;
+			anim.SetBool("lowonhp",true);
+		}
+		else if (!islowhealth)  {    
+			anim.SetBool("lowonhp",false);
+			AADistance = shortmelee;}
 		
 
 					
@@ -366,34 +373,30 @@ public class JellyAI : MonoBehaviour {
 		if (targetStatus != "low")
 			_state = JellyAI.State.PickAction;
 	}
-	void cFrontattack(){
-		//put all the animation and sound here but alèssiò didnt do shit
-	}
-	void Frontattack (){
-		myhitboxes[1].enabled = true;
-	}
-	void pFrontattack(){
-		myhitboxes[1].enabled = false;
-	}
 	void cLowattack(){
+		anim.SetBool("lowkick",true);
 		//put all the animation and sound here but alèssiò didnt do shit
 	}
 	void Lowattack (){
 		myhitboxes[0].enabled = true;
 	}
 	void pLowattack(){
+		anim.SetBool("lowkick",false);
 		myhitboxes[0].enabled = false;
 	}
 	void cHighattack(){
+		anim.SetBool("hightongue",true);
 		//put all the animation and sound here but alèssiò didnt do shit
 	}
 	void Highattack (){
 		myhitboxes[2].enabled = true;
 	}
 	void pHighattack(){
+		anim.SetBool("hightongue",false);
 		myhitboxes[2].enabled = false;
 	}
 	void cKnockattack (){
+		anim.SetBool("knock",true);
 		//animation and sound ur waifu a shit
 	}
 	void Knockattack (){
@@ -403,6 +406,7 @@ public class JellyAI : MonoBehaviour {
 	void pKnockattack (){
 		myhitboxes[0].enabled = false;
 		knockattack = false;
+		anim.SetBool("knock",false);
 	}
 	void Pickattack (){
 		disty =  (target.transform.position.y - _myTransform.position.y);
@@ -461,7 +465,7 @@ public class JellyAI : MonoBehaviour {
 		
 		//      if (disty > highatkrange)
 		//              Jump ();
-		if (disty < highatkrange && disty > 0 && !youaretoohigh)
+		if (disty < highatkrange && disty > 0 && !youaretoohigh && AADistance != longmelee)
 			_state = JellyAI.State.AttackHigh;
 		int _pickattack = Random.Range (0,3);
 		
@@ -472,8 +476,12 @@ public class JellyAI : MonoBehaviour {
 		if (_pickattack==2 && !youaretoohigh && AADistance != longmelee)
 			_state = JellyAI.State.AttackHigh;
 		if (islowhealth && pitbehind || obstaclebehind && islowhealth)
+			if (distx >0 && distx < shortmelee)
 			_state = JellyAI.State.AttackKnock;
-		if (_pickattack == 0 && !youaretoohigh && !repositioning)
+		   else if (distx<0 && distx>-shortmelee)
+			_state = JellyAI.State.AttackKnock;
+		else _state = JellyAI.State.AttackFront;
+		if (_pickattack == 0 && !youaretoohigh && !repositioning && islowhealth && !obstaclebehind && !pitbehind)
 			_state = JellyAI.State.AttackFront;
 		
 		//      if (distx > AADistance-littleamount ||distx < -AADistance+littleamount)

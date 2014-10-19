@@ -6,8 +6,8 @@ public class jellylow : MonoBehaviour {
 	bool entered;
 	bool knockattack;
 	float kickforce = 30;
-	float disty;
-	float distx;
+
+
 	Transform histransform ;
 	bool thrown;
 	GameObject player;
@@ -15,21 +15,33 @@ public class jellylow : MonoBehaviour {
 	bool grounded;
 	void OnTriggerEnter2D (Collider2D other) {
 		if (!entered && other.gameObject.CompareTag("Player")) {
-			knockattack = GetComponentInParent<JellyAI>().knockattack;		
+			knockattack = GetComponentInParent<JellyAI>().knockattack;	
+			if (!knockattack){
+				other.gameObject.GetComponent<PlayerScript>().setstate = "Hit";
+				other.gameObject.GetComponent<PlayerAttackColliders>().Hitlocked = true;
+				
+				Transform parent = transform.parent.transform;
+				Transform enemy = other.gameObject.transform;
+				float distx = (parent.position.x - enemy.position.x);
+				
+				if (distx < 0)
+					other.gameObject.GetComponent<PlayerScript>().hitfromleft = true;
+				if (distx > 0)
+					other.gameObject.GetComponent<PlayerScript>().hitfromleft = false;
+			}
 			if (knockattack){
-				other.gameObject.GetComponent<PlatformerCharacter2D>().enabled = false;
-				other.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-				other.gameObject.GetComponent<Animator>().SetBool("Ground",false);
-				Debug.Log ("KNOCKATTACKU");
-				thrown = true;
-			histransform = transform.parent.GetComponent<Transform>();
-			distx = (other.gameObject.transform.position.x - histransform.position.x);
-				Rigidbody2D targetrigid = other.gameObject.rigidbody2D;
-			if (distx > 0)
-						targetrigid.velocity = new Vector2 (15,15);
-			if (distx <0)
-					targetrigid.velocity = new Vector2 (-15,15);
-				entered = true;}
+				other.gameObject.GetComponent<PlayerScript>().setstate = "Thrown";
+				other.gameObject.GetComponent<PlayerAttackColliders>().Hitlocked = true;
+		
+				
+				Transform parent = transform.parent.transform;
+				Transform enemy = other.gameObject.transform;
+				float distx = (parent.position.x - enemy.position.x);
+				
+				if (distx < 0)
+					other.gameObject.GetComponent<PlayerScript>().hitfromleft = true;
+				if (distx > 0)
+					other.gameObject.GetComponent<PlayerScript>().hitfromleft = false;}
 		}
 	}
 	
@@ -44,14 +56,6 @@ public class jellylow : MonoBehaviour {
 	void Update () {
 		if (thiscollider.enabled == false)
 			entered = false;
-		histransform = transform.parent.GetComponent<Transform>();
-		distx = (player.transform.position.x - histransform.position.x);
-		disty = (histransform.position.y -player.transform.position.y );
-		if (disty > 0.4f && thrown == true){ //15 is the distance for the player to fall down before being able to move again
-		player.GetComponent<Platformer2DUserControl>().enabled = true;
-			player.GetComponent<PlatformerCharacter2D>().enabled = true;
-
-			thrown = false;}
 	}
 }
 
