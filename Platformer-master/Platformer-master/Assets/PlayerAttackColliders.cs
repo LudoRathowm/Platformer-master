@@ -9,49 +9,274 @@ public class PlayerAttackColliders : MonoBehaviour {
 	string SkillReceived;
 	public bool Hitlocked;
 	public float skilltimer;
+	public bool lastactionisbasicattack;
+	public bool lastactioniscomboattack;
+	int turnright;
 	bool _alive = true;
 	Animator anim;
 	private Attack _attackstate;
 	bool delay;
 	public string Status4Mob;
-	private enum Attack
+	bool halfatktime = false;
+	Collider2D[] myhitboxes;
+	private enum Attack	
 	{
-		WaitingForImput,
+		WaitingForInput,
+		Basic,
+		BasicAttack,
+		ThrustR,
+		ThrustL,
 		Topslash,
 		Lowslash,
-		Hitlock
+		Hitlock,
+		RollR,
+		RollL,
+		RollPick,
+		FootPierce,
+		Combo,
+		Combotwo
 	}
 	// Use this for initialization
+// DO NOT USE THE COMBO SYSTEM ITS SHIT. SHIIIIIIT
 	void Start () {
-		_attackstate = PlayerAttackColliders.Attack.WaitingForImput;
+		_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
 	    StartCoroutine ("FSM");
-
-		GameObject _topslash = GameObject.Find ("Top Slash");
-		topslash = _topslash.GetComponent<PolygonCollider2D> ();
-		GameObject _frontal = GameObject.Find ("Front Slash");
-		frontal = _frontal.GetComponent<PolygonCollider2D> ();
-		GameObject _feetthrust = GameObject.Find ("Foot Pierce");
-		feetthrust = _feetthrust.GetComponent<PolygonCollider2D> ();
-		Grounded = gameObject.GetComponent<PlayerScript> ().grounded;
 		anim = GetComponent<Animator>();
-		SkillReceived = GetComponent<Test> ().SkillUsed;
+		myhitboxes = gameObject.GetComponentsInChildren<Collider2D>();
+		Debug.Log (myhitboxes[0]);
+		Debug.Log (myhitboxes[1]);
+		Debug.Log (myhitboxes[2]);
+		Debug.Log (myhitboxes[3]);
+		Debug.Log (myhitboxes[4]);
+		Debug.Log (myhitboxes[5]);
+		Debug.Log (myhitboxes[6]);
+		Debug.Log (myhitboxes[7]);
+		Debug.Log (myhitboxes[8]);
+		Debug.Log (myhitboxes[9]);
 
 	}
 
 	private IEnumerator FSM(){
 		while (_alive){
 			switch (_attackstate) {
-			case Attack.WaitingForImput:
+			case Attack.WaitingForInput:
 				Status4Mob = "Deciding";
-				SkillReceived = GetComponent<Test> ().SkillUsed;
-				if (!Hitlocked){
-				
-				if (SkillReceived == "punch" && !delay)
-					_attackstate = PlayerAttackColliders.Attack.Topslash;
-				if (SkillReceived == "low" && !delay)
-					_attackstate = PlayerAttackColliders.Attack.Lowslash;}
+				if (Input.GetButtonDown("Attack")){
+					skilltimer = 0.25f;
+					_attackstate = Attack.Basic;
+				}
 				else if (Hitlocked)
 					_attackstate = PlayerAttackColliders.Attack.Hitlock;
+				if (Input.GetAxis("AtkDire")!=0){
+					skilltimer = 0.25f;
+					_attackstate = Attack.RollPick;
+				}
+
+				break;				
+			case Attack.Basic:
+				Grounded = GetComponent<PlayerScript>().grounded;
+				Status4Mob = "NotDeciding";
+				if (skilltimer > 0)                    //THIS GOES IN THE ATTACK COLLIDER, ILL JUST LEAVE IT HERE FOR NOW JUST AS A REMINDER;
+					skilltimer -= Time.deltaTime;          // THIS STAYS HERE 420 BLAZE IT
+				if (skilltimer < 0)
+					skilltimer = 0;					
+				if (skilltimer == 0) {
+					if (!lastactionisbasicattack && !lastactioniscomboattack)
+					_attackstate = Attack.BasicAttack;
+					if (lastactionisbasicattack && !lastactioniscomboattack)
+						_attackstate = Attack.Combo;
+					if (lastactioniscomboattack && !lastactionisbasicattack)
+						_attackstate = Attack.Combotwo;
+					}
+					
+				if (Input.GetAxis("AtkDire") < 0) // AUTISM
+					_attackstate =Attack.ThrustL;
+
+
+				if (Input.GetAxis("AtkDire") > 0)
+					_attackstate =Attack.ThrustR;
+
+				if (Input.GetAxis("Vertical")>0)
+					_attackstate = Attack.Topslash;
+				if (Input.GetAxis("Vertical")<0 && !Grounded)
+					_attackstate = Attack.FootPierce;
+				break;
+			case Attack.RollPick:
+				if (Input.GetAxis("AtkDire")>0)
+				    {
+					if (skilltimer > 0)                   
+						skilltimer -= Time.deltaTime;     
+					if (skilltimer < 0)
+						skilltimer = 0;					
+					if (skilltimer == 0) {
+						_attackstate = Attack.WaitingForInput;
+					}
+				if (Input.GetButtonDown("Attack"))
+						_attackstate = Attack.RollR;
+				}
+				if (Input.GetAxis("AtkDire")<0)
+				{
+					if (skilltimer > 0)                   
+						skilltimer -= Time.deltaTime;     
+					if (skilltimer < 0)
+						skilltimer = 0;					
+					if (skilltimer == 0) {
+						_attackstate = Attack.WaitingForInput;
+					}
+					if (Input.GetButtonDown("Attack"))
+						_attackstate = Attack.RollL;
+				}
+				if (skilltimer > 0)                   
+					skilltimer -= Time.deltaTime;     
+				if (skilltimer < 0)
+					skilltimer = 0;					
+				if (skilltimer == 0) {
+					_attackstate = Attack.WaitingForInput;}
+				break;
+
+				
+			case Attack.BasicAttack:
+				Status4Mob = "BasicAttack";
+				pBasicAttack(); //basic atk already waited enought
+				yield return new WaitForSeconds(0.05f);
+				BasicAttack();
+				yield return new WaitForSeconds(0.2f);
+				cBasicAttack();
+				lastactionisbasicattack = true;
+				lastactioniscomboattack = false;
+				_attackstate = Attack.WaitingForInput;
+				break;
+			case Attack.ThrustR:
+				Status4Mob = "Thrust";
+				turnright = GetComponent<PlayerScript>().turnright;
+				if (turnright == 1){
+					pThrust();
+					yield return new WaitForSeconds(0.01f);
+					Thrust();
+					yield return new WaitForSeconds(0.1f);
+					cThrust();
+					lastactionisbasicattack = false;
+					lastactioniscomboattack = false;
+					_attackstate = Attack.WaitingForInput;
+				}
+				if (turnright == -1){
+					Debug.Log ("KANKER");
+					Debug.Log("WAEWA");
+					pKick();
+					yield return new WaitForSeconds(0.1f);
+					Kick();
+					yield return new WaitForSeconds(0.2f);
+					cKick();
+					GetComponent<PlayerScript>().muhflip = true;
+					lastactionisbasicattack = false;
+					lastactioniscomboattack = false;
+					_attackstate = Attack.WaitingForInput;
+				}
+				break;
+			case Attack.ThrustL:
+				Status4Mob = "Thrust";
+				turnright = GetComponent<PlayerScript>().turnright;
+				if (turnright == -1){
+					pThrust();
+					yield return new WaitForSeconds(0.01f);
+					Thrust();
+					yield return new WaitForSeconds(0.1f);
+					cThrust();
+					lastactionisbasicattack = false;
+					lastactioniscomboattack = false;
+					_attackstate = Attack.WaitingForInput;
+				}
+				if (turnright == 1){
+					Debug.Log("WAEWA");
+					pKick();
+					yield return new WaitForSeconds(0.1f);
+					Kick();
+					yield return new WaitForSeconds(0.2f);
+					cKick();
+					GetComponent<PlayerScript>().muhflip = true;
+					lastactionisbasicattack = false;
+					lastactioniscomboattack = false;
+					_attackstate = Attack.WaitingForInput;
+				}
+				break;
+			case Attack.Combo:
+				Status4Mob = "ComboAttack";
+				pBasicAttack(); //1st combo is basically a normal a bit stronger and faster attack
+				BasicAttack();
+				yield return new WaitForSeconds(0.1f);
+				cBasicAttack();
+				Debug.Log ("COMBO");
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = true;
+				_attackstate = Attack.WaitingForInput;
+				break;
+			case Attack.Combotwo:
+				Status4Mob = "DoubleComboAttack";
+				pComboAttack();
+				yield return new WaitForSeconds(0.3f);
+				ComboAttack();
+				yield return new WaitForSeconds(0.2f);
+				cComboAttack();
+				Debug.Log ("COMBO2");
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = Attack.WaitingForInput;
+				break;
+			case Attack.RollL:
+				Status4Mob = "RollL";
+				/*if (turnright == -1)                     //implying i have animations
+					anim.SetBool (Roll,true);
+				if (turnright == 1)
+					anim.SetBool (Cart,true);*/
+				myhitboxes[0].enabled = false;
+				myhitboxes[1].enabled = false;
+				myhitboxes[2].enabled=true;
+				yield return new WaitForSeconds (0.1f);
+				myhitboxes[0].enabled = true;
+				myhitboxes[1].enabled = true;
+				//anim.SetBool (Cart,false);
+				//anim.SetBool (Roll,false);
+				myhitboxes[2].enabled = false;
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = Attack.WaitingForInput;
+				break;
+			case Attack.RollR:
+				Status4Mob = "RollR";
+				/*if (turnright == 1)                     //implying i have animations
+					anim.SetBool (Roll,true);
+				if (turnright == -1)
+					anim.SetBool (Cart,true);*/
+				myhitboxes[0].enabled = false;
+				myhitboxes[1].enabled = false;
+				myhitboxes[2].enabled=true;
+				yield return new WaitForSeconds (0.1f);
+				myhitboxes[0].enabled = true;
+				myhitboxes[1].enabled = true;
+				//anim.SetBool (Cart,false);
+				//anim.SetBool (Roll,false);
+				myhitboxes[2].enabled = false;
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = Attack.WaitingForInput;
+				break;
+			case Attack.FootPierce:
+				Status4Mob = "FootPierce";
+				pFootPierce();
+				yield return new WaitForSeconds (0.2f);
+				FootPierce();
+				Grounded = GetComponent<PlayerScript>().grounded;
+				if (Grounded){
+					cFootPierce();					
+					lastactionisbasicattack = false;
+					lastactioniscomboattack = false;
+					_attackstate = Attack.WaitingForInput;
+				}
+				yield return new WaitForSeconds (0.5f);
+				cFootPierce();
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = Attack.WaitingForInput;
 				break;
 			case Attack.Topslash:
 				Status4Mob = "TopSlash";
@@ -60,7 +285,8 @@ public class PlayerAttackColliders : MonoBehaviour {
 				Topslash();
 				yield return new WaitForSeconds(0.2f);
 				cTopslash();
-				_attackstate = PlayerAttackColliders.Attack.WaitingForImput;
+				lastactionisbasicattack = false;
+				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
 				break;
 			case Attack.Lowslash:
 				Status4Mob = "LowSlash";
@@ -69,24 +295,74 @@ public class PlayerAttackColliders : MonoBehaviour {
 				Lowslash();
 				yield return new WaitForSeconds (0.2f);
 				cLowslash();
-				_attackstate = PlayerAttackColliders.Attack.WaitingForImput;
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
 				break;
 			case Attack.Hitlock:
 				yield return new WaitForSeconds (0.2f);
-				_attackstate = PlayerAttackColliders.Attack.WaitingForImput;
+				Hitlocked = false;
+				lastactionisbasicattack = false;
+				lastactioniscomboattack = false;
+				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
+
 				break;
 			}
 			yield return null;
 		}	
 	}
+	void pFootPierce(){}
+	void FootPierce(){
+		myhitboxes[6].enabled=true;
+	}
+	void cFootPierce(){
+		myhitboxes[6].enabled=false;
+	}
+
+	void pBasicAttack(){
+		/*if (!lastactionisbasicattack)
+			normalanimation
+				else if (lastactionisbasicattack)
+					gayasscomboanimation*/
+	}
+	void BasicAttack (){
+		myhitboxes[3].enabled = true;
+	}
+	void cBasicAttack (){
+		myhitboxes [3].enabled = false;
+		//close animations duh
+	}
+	void pThrust (){}
+	void Thrust (){
+		myhitboxes[4].enabled = true;
+	}
+	void cThrust(){
+		myhitboxes[4].enabled=false;
+	}
+	void pKick(){}
+	void Kick (){
+		myhitboxes[10].enabled=true;
+	}
+	void cKick(){
+		myhitboxes[10].enabled = false;
+	}
+	void pComboAttack(){
+		//>having animations
+	}
+	void ComboAttack(){
+		myhitboxes[9].enabled = true;
+	}
+	void cComboAttack(){
+		myhitboxes[9].enabled= false;
+	}
 	void pTopslash(){
 		anim.SetBool ("Topslash", true);
 	}
 	void Topslash () {		
-					topslash.enabled = true;
+					myhitboxes[5].enabled = true;
 		}	
 	void cTopslash () {
-		topslash.enabled = false;
+		myhitboxes[5].enabled = false;
 		anim.SetBool ("Topslash", false);
 		}
 	void pLowslash(){

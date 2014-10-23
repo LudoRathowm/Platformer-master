@@ -1,17 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerAttackColliders.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerScript.cs">
     <Files>
-      <File FileName="Assets\PlayerAttackColliders.cs" Line="58" Column="17" />
-      <File FileName="Assets\jellylong.cs" Line="36" Column="1" />
-      <File FileName="Assets\jellyhigh.cs" Line="1" Column="1" />
-      <File FileName="Assets\PlayerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\JellyAI.cs" Line="34" Column="26" />
-      <File FileName="Assets\jellylow.cs" Line="19" Column="22" />
-      <File FileName="Assets\JumpyEnemy.cs" Line="15" Column="2" />
-      <File FileName="Assets\JellySpitter.cs" Line="23" Column="9" />
-      <File FileName="Assets\Spit.cs" Line="27" Column="17" />
-      <File FileName="Assets\FeetThrust.cs" Line="8" Column="18" />
+      <File FileName="Assets\PlayerScript.cs" Line="96" Column="44" />
+      <File FileName="Assets\PlayerAttackColliders.cs" Line="1" Column="1" />
+      <File FileName="Assets\JellyAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Test.cs" Line="1" Column="1" />
+      <File FileName="Assets\Spit.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

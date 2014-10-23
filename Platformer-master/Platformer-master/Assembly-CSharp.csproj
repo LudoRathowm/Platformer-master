@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AttackInputs.cs" />
      <Compile Include="Assets\Bulleteffect.cs" />
      <Compile Include="Assets\CheckForObstacle.cs" />
      <Compile Include="Assets\CheckGround.cs" />

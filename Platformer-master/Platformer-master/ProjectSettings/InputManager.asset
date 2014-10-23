@@ -404,3 +404,67 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
+  - serializedVersion: 3
+    m_Name: Attack
+    descriptiveName: title
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: x
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: .189999998
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: AtkDire
+    descriptiveName: title
+    descriptiveNegativeName: 
+    negativeButton: z
+    positiveButton: c
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: .189999998
+    sensitivity: 1
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: UpArm
+    descriptiveName: up key kinda lyl
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: s
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: .189999998
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: AtkDire
+    descriptiveName: title
+    descriptiveNegativeName: 
+    negativeButton: z
+    positiveButton: c
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: .189999998
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0

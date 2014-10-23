@@ -28,6 +28,7 @@ public class Spit : MonoBehaviour {
 			other.gameObject.GetComponent<PlayerScript>().hitfromleft = true;
 		if (distx > 0)
 			other.gameObject.GetComponent<PlayerScript>().hitfromleft = false;
+			Destroy(gameObject,0f);
 	}
 		}
 	}

@@ -6,9 +6,14 @@ public class PlayerScript : MonoBehaviour {
 		Normal,
 		Hit,
 		Thrown,
-		Stunned
+		Stunned,
+		RollR,
+		RollL,
+		Combo,
+		DoubleCombo
 	}
 	bool facingRight = true;
+	public bool muhflip; //some skills may force you to flip m8
 	float halfdistanceheight;
 	public string setstate;
 	public bool hitfromleft;
@@ -19,9 +24,12 @@ public class PlayerScript : MonoBehaviour {
 	public int turnright;
 	float maxSpeed = 10;
 	float jumpForce = 750f;
-	float hitforce = 333f;
+	float hitforce = 150f;
 	float ThrownForce = 1000f;
 	float littlejump = 20f;
+	float rollforce = 2600f;
+	float Comboforce = 50;
+	float DoubleComboforce = 100;
 	bool jump;
 	Rigidbody2D mybody;
 	bool _alive = true;
@@ -47,8 +55,10 @@ public class PlayerScript : MonoBehaviour {
 					mybody.AddForce(new Vector2(hitforce, hitforce));
 			else if (!hitfromleft)
 					mybody.AddForce(new Vector2(-hitforce, hitforce));
-				yield return new WaitForSeconds(0.2f);
+				yield return new WaitForSeconds(0.02f);
 				setstate = "Normal";
+				GetComponent<PlayerAttackColliders>().lastactionisbasicattack = false;
+				GetComponent<PlayerAttackColliders>().lastactioniscomboattack = false;
 				_state = PlayerScript.State.Normal;
 				break;
 			case State.Thrown:
@@ -60,6 +70,33 @@ public class PlayerScript : MonoBehaviour {
 				setstate = "Normal";
 				_state = PlayerScript.State.Normal;
 				break;
+			case State.RollL:
+				mybody.AddForce(new Vector2 (-rollforce,0));
+				yield return new WaitForSeconds (0.1f);
+				_state = State.Normal;
+				break;
+			case State.RollR:
+				mybody.AddForce(new Vector2 (rollforce,0));
+				yield return new WaitForSeconds (0.1f);
+				_state = State.Normal;
+				break;
+			case State.Combo:
+				if (facingRight)
+					mybody.AddForce(new Vector2(Comboforce,Comboforce));
+				if (!facingRight)
+					mybody.AddForce(new Vector2(-Comboforce,Comboforce));
+				yield return new WaitForSeconds (0.2f);
+				_state = State.Normal;
+				break;
+			case State.DoubleCombo:
+				if (facingRight)
+				
+					mybody.AddForce(new Vector2(Comboforce,DoubleComboforce));
+				if (!facingRight)
+					mybody.AddForce(new Vector2(Comboforce,DoubleComboforce));
+				yield return new WaitForSeconds (0.5f);
+				_state = State.Normal;
+				break;
 			}
 			yield return null;
 		}
@@ -67,7 +104,7 @@ public class PlayerScript : MonoBehaviour {
 
 
 	void FixedUpdate(){
-		if (Physics2D.Raycast(transform.position,Vector3.down, halfdistanceheight + 0.52f, whatIsGround)) //a bit more than the player collider eight
+		if (Physics2D.Raycast(transform.position,Vector3.down, halfdistanceheight + 0.62f, whatIsGround)) //a bit more than the player collider eight
 			grounded = true;
 		else grounded = false; 
 		Debug.DrawRay (transform.position, Vector3.down*(halfdistanceheight+0.52f));
@@ -92,18 +129,37 @@ public class PlayerScript : MonoBehaviour {
 	
 	}
 	void CheckForImput(){		
+		string input = GetComponent<PlayerAttackColliders>().Status4Mob;
+		bool imattacking = false;
+		if (input != "Deciding")
+			imattacking = true;
+		else if (input == "Deciding")
+			imattacking = false;
+		if (input == "RollL")
+			_state = State.RollL;
+		if (input == "RollR")
+			_state = State.RollR;
+		if (input == "ComboAttack")
+			_state = State.Combo;
+		if (input == "DoubleComboAttack")
+			_state = State.DoubleCombo;
 		if (grounded)
 			move = Input.GetAxis("Horizontal");
 		
 		if (Input.GetButtonDown("Jump")) 
 			jump = true;
-		
-		if (move != 0 || jump || !nocontrol)
+		if (move != 0 || jump || !nocontrol )
+			if (!imattacking)
 			Move ();
 		if(move > 0 && !facingRight)
 			Flip();
 		else if(move < 0 && facingRight)
 			Flip();
+		if (muhflip){
+			muhflip = false;
+			Flip();
+		}
+
 	}
 
 	void Move () {
@@ -113,7 +169,9 @@ public class PlayerScript : MonoBehaviour {
 			jump = false;
 			if (grounded)
 			rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-		}}
+		}
+
+	}
 		void Flip ()
 		{
 			facingRight = !facingRight;
@@ -121,5 +179,6 @@ public class PlayerScript : MonoBehaviour {
 			muhscale.x *= -1;
 			transform.localScale = muhscale;
 		}
+
 	}
 

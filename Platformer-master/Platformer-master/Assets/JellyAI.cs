@@ -323,7 +323,10 @@ public class JellyAI : MonoBehaviour {
 		
 		
 		//WHEN TO GUARD
-		if (targetStatus == "TopSlash" && playerturn == 1 && distx < 0 || targetStatus == "TopSlash" && playerturn == -1 && distx > 0 || targetStatus == "LowSlash" && playerturn == 1 && distx < 0 || targetStatus == "LowSlash" && playerturn == -1 && distx > 0)
+		if (targetStatus == "TopSlash" && playerturn == 1 && distx < 0 && distx > -shortmelee||
+		    targetStatus == "TopSlash" && playerturn == -1 && distx > 0 && distx < shortmelee||
+		    targetStatus == "LowSlash" && playerturn == 1 && distx < 0 && distx > -shortmelee || 
+		    targetStatus == "LowSlash" && playerturn == -1 && distx > 0 && distx < shortmelee)
 			_state = JellyAI.State.Guard;
 		//DECIDE TO ATTACK
 		if (targetStatus == "Deciding" && !needtorun)

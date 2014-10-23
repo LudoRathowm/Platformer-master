@@ -455,7 +455,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 85dc95a041a51334a8a1678ef6e31db1, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 144, y: 108, z: 0}
+  m_Position: {x: 96, y: 48, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -500,7 +500,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: c3968690ae322244f91a5dab1ffcde71, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 324, y: 84, z: 0}
+  m_Position: {x: 432, y: 144, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -515,7 +515,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: caf20d883e4c27143a14621cf7b00127, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 540, y: -36, z: 0}
+  m_Position: {x: 24, y: -48, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -560,7 +560,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: af2ab97df8bb3e9429236d8b4cf5e5aa, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 204, y: -168, z: 0}
+  m_Position: {x: 120, y: -132, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -575,7 +575,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 5de3565d43ace1645b221a40db06e978, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 528, y: 24, z: 0}
+  m_Position: {x: 540, y: -24, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -590,7 +590,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: d51308496507df84a893d9818f08906f, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 72, y: -48, z: 0}
+  m_Position: {x: 144, y: 144, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -616,10 +616,6 @@ StateMachine:
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
-    data:
-      first: {fileID: 110217765}
-      second:
-      - {fileID: 110117013}
     data:
       first: {fileID: 0}
       second:
@@ -667,6 +663,10 @@ StateMachine:
       first: {fileID: 110259186}
       second:
       - {fileID: 110107644}
+    data:
+      first: {fileID: 110217765}
+      second:
+      - {fileID: 110117013}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 48, y: 24, z: 0}
+  m_AnyStatePosition: {x: 312, y: 204, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
