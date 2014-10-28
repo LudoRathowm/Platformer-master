@@ -2,22 +2,21 @@
 using System.Collections;
 
 public class PlayerAttackColliders : MonoBehaviour {
-	PolygonCollider2D topslash;
-    public bool Grounded;
-	PolygonCollider2D frontal;
-	PolygonCollider2D feetthrust;
-	string SkillReceived;
+	public bool Grounded;
+    string SkillReceived;
 	public bool Hitlocked;
 	public float skilltimer;
 	public bool lastactionisbasicattack;
+	bool parrylelr; //block other actions
+	bool parrylell; //block other actions
 	public bool lastactioniscomboattack;
 	int turnright;
 	bool _alive = true;
+	public int parry;
 	Animator anim;
 	private Attack _attackstate;
-	bool delay;
+
 	public string Status4Mob;
-	bool halfatktime = false;
 	Collider2D[] myhitboxes;
 	private enum Attack	
 	{
@@ -27,14 +26,19 @@ public class PlayerAttackColliders : MonoBehaviour {
 		ThrustR,
 		ThrustL,
 		Topslash,
-		Lowslash,
 		Hitlock,
 		RollR,
 		RollL,
 		RollPick,
 		FootPierce,
 		Combo,
-		Combotwo
+		Combotwo,
+		Parry,
+		ParryR,
+		ParryL,
+	//	ParryFront,
+	//	ParryBack
+	
 	}
 	// Use this for initialization
 // DO NOT USE THE COMBO SYSTEM ITS SHIT. SHIIIIIIT
@@ -67,15 +71,20 @@ public class PlayerAttackColliders : MonoBehaviour {
 				}
 				else if (Hitlocked)
 					_attackstate = PlayerAttackColliders.Attack.Hitlock;
+				if (Input.GetButtonDown("Parry")){
+					skilltimer = 0.2f;
+					_attackstate = Attack.Parry;}
 				if (Input.GetAxis("AtkDire")!=0){
 					skilltimer = 0.25f;
 					_attackstate = Attack.RollPick;
 				}
 
+						
+				
 				break;				
 			case Attack.Basic:
 				Grounded = GetComponent<PlayerScript>().grounded;
-				Status4Mob = "NotDeciding";
+				Status4Mob = "BasicAttack"; //kek
 				if (skilltimer > 0)                    //THIS GOES IN THE ATTACK COLLIDER, ILL JUST LEAVE IT HERE FOR NOW JUST AS A REMINDER;
 					skilltimer -= Time.deltaTime;          // THIS STAYS HERE 420 BLAZE IT
 				if (skilltimer < 0)
@@ -138,7 +147,7 @@ public class PlayerAttackColliders : MonoBehaviour {
 			case Attack.BasicAttack:
 				Status4Mob = "BasicAttack";
 				pBasicAttack(); //basic atk already waited enought
-				yield return new WaitForSeconds(0.05f);
+				yield return new WaitForSeconds(0.1f);
 				BasicAttack();
 				yield return new WaitForSeconds(0.2f);
 				cBasicAttack();
@@ -160,8 +169,7 @@ public class PlayerAttackColliders : MonoBehaviour {
 					_attackstate = Attack.WaitingForInput;
 				}
 				if (turnright == -1){
-					Debug.Log ("KANKER");
-					Debug.Log("WAEWA");
+		
 					pKick();
 					yield return new WaitForSeconds(0.1f);
 					Kick();
@@ -187,7 +195,7 @@ public class PlayerAttackColliders : MonoBehaviour {
 					_attackstate = Attack.WaitingForInput;
 				}
 				if (turnright == 1){
-					Debug.Log("WAEWA");
+		
 					pKick();
 					yield return new WaitForSeconds(0.1f);
 					Kick();
@@ -205,7 +213,7 @@ public class PlayerAttackColliders : MonoBehaviour {
 				BasicAttack();
 				yield return new WaitForSeconds(0.1f);
 				cBasicAttack();
-				Debug.Log ("COMBO");
+	
 				lastactionisbasicattack = false;
 				lastactioniscomboattack = true;
 				_attackstate = Attack.WaitingForInput;
@@ -217,7 +225,7 @@ public class PlayerAttackColliders : MonoBehaviour {
 				ComboAttack();
 				yield return new WaitForSeconds(0.2f);
 				cComboAttack();
-				Debug.Log ("COMBO2");
+			
 				lastactionisbasicattack = false;
 				lastactioniscomboattack = false;
 				_attackstate = Attack.WaitingForInput;
@@ -288,26 +296,103 @@ public class PlayerAttackColliders : MonoBehaviour {
 				lastactionisbasicattack = false;
 				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
 				break;
-			case Attack.Lowslash:
-				Status4Mob = "LowSlash";
-				pLowslash();
-				yield return new WaitForSeconds (0.1f);
-				Lowslash();
-				yield return new WaitForSeconds (0.2f);
-				cLowslash();
-				lastactionisbasicattack = false;
-				lastactioniscomboattack = false;
-				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
-				break;
 			case Attack.Hitlock:
 				yield return new WaitForSeconds (0.2f);
 				Hitlocked = false;
 				lastactionisbasicattack = false;
 				lastactioniscomboattack = false;
 				_attackstate = PlayerAttackColliders.Attack.WaitingForInput;
+				break;
+			case Attack.Parry:
+				Status4Mob = "Parry";
+				turnright = GetComponent<PlayerScript>().turnright;
+				if (skilltimer > 0)                   
+					skilltimer -= Time.deltaTime;     
+				if (skilltimer < 0)
+					skilltimer = 0;					
+				if (skilltimer == 0) {
+					_attackstate = Attack.WaitingForInput;
+				}
+			
+				if (Input.GetAxis("AtkDire")>0 )
+					_attackstate = Attack.ParryR;
 
+				if (Input.GetAxis("AtkDire")<0 )
+					_attackstate = Attack.ParryL;
+				break;/*
+			case Attack.ParryBack:
+				turnright = GetComponent<PlayerScript>().turnright;
+				parry = -1;
+				if (turnright == -1){
+
+					//anim.blabla.activateit.parryfront.
+					yield return new WaitForSeconds (0.5f);
+						//anim.blablav2
+						parry = 0;
+					_attackstate = Attack.WaitingForInput;
+				}
+				if (turnright == 1){
+					//anim dicks
+					yield return new WaitForSeconds (0.5f);
+					GetComponent<PlayerScript>().muhflip = true;
+					parry = 0;
+					_attackstate = Attack.WaitingForInput;
+
+				}
+				break;
+			case Attack.ParryFront:
+				turnright = GetComponent<PlayerScript>().turnright;
+				parry = 1;
+				if (turnright == 1){
+					
+					//anim.blabla.activateit.parryfront.
+					yield return new WaitForSeconds (0.5f);
+					//anim.blablav2
+					parry = 0;
+					_attackstate = Attack.WaitingForInput;
+				}
+				if (turnright == -1){
+					//anim dicks
+					yield return new WaitForSeconds (0.5f);
+					GetComponent<PlayerScript>().muhflip = true;
+					parry = 0;
+					_attackstate = Attack.WaitingForInput;
+					
+				}
+				break;*/
+			case Attack.ParryR:
+				turnright = GetComponent<PlayerScript>().turnright;
+				parry = 1;
+				Status4Mob = "ParryR";
+				//if (turnright == 1)
+					//anim.normale, solo anim in cui tiene la spada, niente movimento per avvicinarla
+				//if (turnright == -1)
+						//anim.anormale
+				
+				if (Input.GetButtonUp("Parry")){
+					Debug.Log ("FUCK ME");
+					parry = 0;
+					//	anim.blablacloseall
+					_attackstate = Attack.WaitingForInput;
+				}
+				break;
+			case Attack.ParryL:
+				turnright = GetComponent<PlayerScript>().turnright;
+				parry = -1;
+				Status4Mob = "ParryL";
+				//if (turnright == -1)
+					//anim.normale, solo anim in cui tiene la spada, niente movimento per avvicinarla
+				//	if (turnright == +1)
+						//anim.anormale
+					if (Input.GetButtonUp("Parry")){
+						Debug.Log ("FUCK ME");
+						parry = 0;
+						//	anim.blablacloseall
+						_attackstate = Attack.WaitingForInput;
+					}
 				break;
 			}
+
 			yield return null;
 		}	
 	}
@@ -368,15 +453,6 @@ public class PlayerAttackColliders : MonoBehaviour {
 	void pLowslash(){
 		anim.SetBool ("Lowslash", true);
 	}
-	void Lowslash () {
-		frontal.enabled = true;
-
-	}
-	void cLowslash(){
-		frontal.enabled = false;
-		anim.SetBool ("Lowslash", false);
-	}
-
 
 
 

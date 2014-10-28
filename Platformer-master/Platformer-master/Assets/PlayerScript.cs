@@ -89,11 +89,10 @@ public class PlayerScript : MonoBehaviour {
 				_state = State.Normal;
 				break;
 			case State.DoubleCombo:
-				if (facingRight)
-				
+				if (facingRight)				
 					mybody.AddForce(new Vector2(Comboforce,DoubleComboforce));
 				if (!facingRight)
-					mybody.AddForce(new Vector2(Comboforce,DoubleComboforce));
+					mybody.AddForce(new Vector2(-Comboforce,DoubleComboforce));
 				yield return new WaitForSeconds (0.5f);
 				_state = State.Normal;
 				break;
@@ -151,9 +150,9 @@ public class PlayerScript : MonoBehaviour {
 		if (move != 0 || jump || !nocontrol )
 			if (!imattacking)
 			Move ();
-		if(move > 0 && !facingRight)
+		if(move > 0 && !facingRight && !imattacking)
 			Flip();
-		else if(move < 0 && facingRight)
+		else if(move < 0 && facingRight && !imattacking)
 			Flip();
 		if (muhflip){
 			muhflip = false;

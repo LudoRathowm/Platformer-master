@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 44afef915bbd54e4eadfa0407e078695
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: moonwalk_0
+    21300002: moonwalk_1
+    21300004: moonwalk_2
+    21300006: moonwalk_3
+    21300008: moonwalk_4
+    21300010: moonwalk_5
+    21300012: moonwalk_6
+    21300014: moonwalk_7
+    21300016: moonwalk_8
+    21300018: moonwalk_9
+    21300020: moonwalk_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 33
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: moonwalk_0
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 385
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_1
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 389
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_2
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 393
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_3
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 395
+        width: 81
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_4
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 390
+        width: 107
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 145
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_6
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 148
+        width: 81
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_7
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 139
+        width: 73
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_8
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 133
+        width: 101
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_9
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 132
+        width: 91
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: moonwalk_10
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 374
+        width: 8
+        height: 2
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

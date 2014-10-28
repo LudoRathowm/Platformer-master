@@ -8,10 +8,7 @@ public class Spit : MonoBehaviour {
 		Destroy (gameObject,3f);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.name=="Top Slash" || other.gameObject.name=="Front Slash")
 			Destroy(gameObject,0f);

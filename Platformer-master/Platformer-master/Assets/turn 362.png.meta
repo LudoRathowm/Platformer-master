@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: c73b1114c2cad27448f96597a291f2e8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: turn 362_0
+    21300002: turn 362_1
+    21300004: turn 362_2
+    21300006: turn 362_3
+    21300008: turn 362_4
+    21300010: turn 362_6
+    21300012: turn 362_7
+    21300014: turn 362_8
+    21300016: turn 362_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 33
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: turn 362_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 428
+        width: 84
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 387
+        width: 70
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_2
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 391
+        width: 41
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_3
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 399
+        width: 50
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_4
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 412
+        width: 50
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_6
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 101
+        width: 41
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_7
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 95
+        width: 70
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_8
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 89
+        width: 84
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: turn 362_9
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 84
+        width: 84
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

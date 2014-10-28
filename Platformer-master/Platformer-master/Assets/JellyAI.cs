@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 public class JellyAI : MonoBehaviour {
+	float annoytimer;
+	bool halftired; // TIRED OF UR SHIT M8 UR A PUSSY ASS BITCH
+	bool actuallytired;
+	int muhrngbasedai;
 	bool FacingRight = true;
 	private enum State
 	{
@@ -17,8 +21,10 @@ public class JellyAI : MonoBehaviour {
 		Guard,
 		PlayerOutOfReach,
 		AttackKnock,
-		AtHome
+		AtHome,
+		CallingYouOut
 	}
+	bool dontattack; //muh rabid ai
 	public bool knockattack;
 	bool repositioning;
 	bool obstaclebehind; //so you dont try to get away and you have your back to a wall/pit and can't move/fall into it
@@ -33,6 +39,7 @@ public class JellyAI : MonoBehaviour {
 	const int shortmelee = 2;
 	const int longmelee = 10;
 	public bool islowhealth = false;
+	float noatkcd;
 	float distx;
 	float disty;
 	float myheight = 1.6f; //how big taller the mob is compared to the player to prevent bugs with youaretoohigh
@@ -94,13 +101,22 @@ public class JellyAI : MonoBehaviour {
 				Approach();
 				break;
 			case State.PickAction:
+	
 				PickAction ();
 				break;
 			case State.AvoidLow:
 				AvoidLow();
 				break;
-			case State.PlayerOutOfReach:
-				BackHome();
+			case State.PlayerOutOfReach:				
+				target = _home;
+				if (actuallytired){
+					anim.SetBool ("360turn",true);
+					yield return new WaitForSeconds (0.5f);
+					anim.SetBool ("360turn",false);
+					anim.SetBool("moonwalk",true);
+				}
+				_state = JellyAI.State.Approach;
+			
 				break;
 			case State.AtHome:
 				SweetHome();
@@ -149,6 +165,40 @@ public class JellyAI : MonoBehaviour {
 				yield return new WaitForSeconds (0.2f);
 				pKnockattack ();
 				_state =JellyAI.State.PickAction;
+				break;
+			case State.CallingYouOut:
+				anim.SetBool("smugface",true);
+				targetStatus = target.gameObject.GetComponent<PlayerAttackColliders>().Status4Mob;
+				if (targetStatus != "ParryR" && targetStatus != "ParryL"){
+					_state =State.PickAction;
+					anim.SetBool("smugface",false);
+									}
+				if (annoytimer > 0)
+					annoytimer -= Time.deltaTime;
+				if (annoytimer < 0)
+					annoytimer = 0;
+				if (annoytimer == 0){
+					if (!halftired){
+						GameObject text1 = GameObject.Find("guard 1");
+						text1.GetComponent<MeshRenderer>().enabled = true;
+						yield return new WaitForSeconds (2);
+						text1.GetComponent<MeshRenderer>().enabled = false;
+						annoytimer = 3f;
+						halftired = true;
+					}
+					if (halftired){
+						halftired = false;
+						GameObject text2 = GameObject.Find("guard 2");
+						text2.GetComponent<MeshRenderer>().enabled = true;
+						yield return new WaitForSeconds (2);
+						text2.GetComponent<MeshRenderer>().enabled = false;
+						Debug.Log ("REAL TIRED OF YOUR SHIT");
+						actuallytired = true;
+						//FULL HEAL HERE plus level up or some shit
+						anim.SetBool("smugface",false);
+						_state = State.PlayerOutOfReach;
+					}
+			}
 				break;
 			}
 			yield return null;
@@ -270,6 +320,8 @@ public class JellyAI : MonoBehaviour {
 
 		anim.SetFloat("Speed",0);
 		targetStatus = target.gameObject.GetComponent<PlayerAttackColliders>().Status4Mob;
+		if (targetStatus == "BasicAttack" || targetStatus == "Thrust" || targetStatus == "ComboAttack")
+			targetStatus = "low";
 		//ALL THE STUFF FOR POSITIONING,ETC NOT ACTUAL ACTION PICKING
 		if (Physics2D.Raycast(transform.position,Vector3.down, halfdistanceheight + 0.1f, mask))
 			grounded = true;
@@ -290,23 +342,49 @@ public class JellyAI : MonoBehaviour {
 		}
 		anim.SetFloat("Speed",0);
 		dodgepit = false;
+
+		muhrngbasedai = Random.Range(0,20);
+
+		if (muhrngbasedai > 5 && !dontattack && noatkcd == 0)
+			dontattack = true;
+		if (dontattack == true && noatkcd == 0)
+			noatkcd = 10/muhrngbasedai;
+
+			if (noatkcd > 0)
+			noatkcd -= Time.deltaTime;
+		    if (noatkcd <0)
+			noatkcd = 0;
+		if (noatkcd ==0){
+			dontattack = false;
+		}
 		
-		
+		if (targetStatus == "ParryL" && distx > 0 || targetStatus == "ParryR" && distx < 0){
+			annoytimer = 2;
+			_state = State.CallingYouOut;}
 		
 		disty =  (target.transform.position.y - _myTransform.position.y);
 		
 		if (disty < -1.6f  && distx > 0 || disty < -1.6f && distx < 0)
 			youaretoohigh = true;
-		
 		//CHECK THE DIRECTION OF THE PLAYER AND THEN DECIDE IF YOU WANT TO DODGE A LOWHIT
-
+		
 		playerturn = target.gameObject.GetComponent<PlayerScript>().turnright;
-		if (targetStatus == "LowSlash" && playerturn == 1 && distx < 0 && !youaretoohigh)
+		//WHEN TO GUARD
+		if (targetStatus == "low" && playerturn == 1 && distx < 0 && distx > -shortmelee||
+		    targetStatus == "low" && playerturn == -1 && distx > 0 && distx < shortmelee
+		    ){
+			int lazyenemy = Random.Range (0,15); //i don't want it jumping most of the time, it's a lazy enemy, it will guard instead most of the time.
+		if (lazyenemy >1)
+			_state=	JellyAI.State.Guard;
+		else 
+			_state = JellyAI.State.AvoidLow;}
+		/*if (targetStatus == "low" && playerturn == 1 && distx < 0 && !youaretoohigh)
 			_state = JellyAI.State.AvoidLow;
-		if (targetStatus == "LowSlash" && playerturn == -1 && distx > 0 && !youaretoohigh)
+		if (targetStatus == "low" && playerturn == -1 && distx > 0 && !youaretoohigh)
 			_state = JellyAI.State.AvoidLow;
-		
-		
+		*/
+
+
 		//IF LOW ON HP, CHANGE AA DISTANCE
 		if (islowhealth && AADistance != longmelee)	 {	
 			AADistance = longmelee;
@@ -323,13 +401,17 @@ public class JellyAI : MonoBehaviour {
 		
 		
 		//WHEN TO GUARD
-		if (targetStatus == "TopSlash" && playerturn == 1 && distx < 0 && distx > -shortmelee||
-		    targetStatus == "TopSlash" && playerturn == -1 && distx > 0 && distx < shortmelee||
-		    targetStatus == "LowSlash" && playerturn == 1 && distx < 0 && distx > -shortmelee || 
-		    targetStatus == "LowSlash" && playerturn == -1 && distx > 0 && distx < shortmelee)
-			_state = JellyAI.State.Guard;
+		if (targetStatus == "slow" && playerturn == 1 && distx < 0 && distx > -shortmelee||
+		    targetStatus == "slow" && playerturn == -1 && distx > 0 && distx < shortmelee||
+		    targetStatus == "TopSlash" && playerturn == 1 && distx < 0 && distx > -shortmelee || 
+		    targetStatus == "TopSlash" && playerturn == -1 && distx > 0 && distx < shortmelee)
+		{int aggroenemy = Random.Range(0, 5);
+			if (aggroenemy < 3)
+				_state = JellyAI.State.PickAttack;
+			else 
+				_state = JellyAI.State.Guard;}
 		//DECIDE TO ATTACK
-		if (targetStatus == "Deciding" && !needtorun)
+		if (targetStatus == "Deciding" && !needtorun && !dontattack)
 			_state = JellyAI.State.PickAttack;
 		
 		if (distx>AADistance || distx < -AADistance)
@@ -358,19 +440,22 @@ public class JellyAI : MonoBehaviour {
 		if (grounded)
 			anim.SetBool("isGrounded", true);
 	}
-	void BackHome (){
-		target = _home;
-		_state = JellyAI.State.Approach;
-	}
+
 	void SweetHome (){
+		anim.SetBool("moonwalk", false);
 		target = GameObject.FindGameObjectWithTag ("Player").transform;
 		distx = (target.transform.position.x - _myTransform.position.x);
-		if (distx < AwakeDistance && distx > -AwakeDistance)
+		if (distx < AwakeDistance && distx > -AwakeDistance && !actuallytired)
 			_state = JellyAI.State.Approach;
+		if (distx < AwakeDistance/2 && distx > -AwakeDistance/2 && actuallytired){
+			actuallytired = false;
+			_state = State.Approach;
+		}
+
 		
 	}
 	void AvoidLow(){
-		
+	
 		Jump();
 		targetStatus = target.gameObject.GetComponent<PlayerAttackColliders>().Status4Mob;
 		if (targetStatus != "low")
