@@ -85,8 +85,11 @@ public class PlayerAttackColliders : MonoBehaviour {
 			case Attack.Basic:
 				Grounded = GetComponent<PlayerScript>().grounded;
 				Status4Mob = "BasicAttack"; //kek
-				if (skilltimer > 0)                    //THIS GOES IN THE ATTACK COLLIDER, ILL JUST LEAVE IT HERE FOR NOW JUST AS A REMINDER;
-					skilltimer -= Time.deltaTime;          // THIS STAYS HERE 420 BLAZE IT
+				if (skilltimer > 0)               {     //THIS GOES IN THE ATTACK COLLIDER, ILL JUST LEAVE IT HERE FOR NOW JUST AS A REMINDER;
+					skilltimer -= Time.deltaTime;  
+				if (lastactionisbasicattack)
+						skilltimer -= Time.deltaTime;  //if im comboing im faster
+				}        // THIS STAYS HERE 420 BLAZE IT
 				if (skilltimer < 0)
 					skilltimer = 0;					
 				if (skilltimer == 0) {
@@ -311,7 +314,10 @@ public class PlayerAttackColliders : MonoBehaviour {
 				if (skilltimer < 0)
 					skilltimer = 0;					
 				if (skilltimer == 0) {
-					_attackstate = Attack.WaitingForInput;
+					if (turnright == 1)
+						_attackstate = Attack.ParryR;
+					if (turnright == -1)
+						_attackstate = Attack.ParryL;
 				}
 			
 				if (Input.GetAxis("AtkDire")>0 )

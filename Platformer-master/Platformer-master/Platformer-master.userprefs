@@ -1,13 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerAttackColliders.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\JellyFishAI.cs">
     <Files>
-      <File FileName="Assets\JellyAI.cs" Line="274" Column="1" />
-      <File FileName="Assets\jellyhigh.cs" Line="1" Column="1" />
-      <File FileName="Assets\Spit.cs" Line="1" Column="1" />
-      <File FileName="Assets\Frontslash.cs" Line="1" Column="1" />
-      <File FileName="Assets\PlayerScript.cs" Line="95" Column="35" />
-      <File FileName="Assets\PlayerAttackColliders.cs" Line="371" Column="27" />
+      <File FileName="Assets\PlayerScript.cs" Line="222" Column="53" />
+      <File FileName="Assets\JellyFishAI.cs" Line="100" Column="1" />
+      <File FileName="Assets\JellyAI.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -10,14 +10,19 @@ public class PlayerScript : MonoBehaviour {
 		RollR,
 		RollL,
 		Combo,
-		DoubleCombo
+		DoubleCombo,
+		SlipL,
+		SlipR
+
 	}
+public 	float sliptime = 0.3f;
 	bool facingRight = true;
 	public bool muhflip; //some skills may force you to flip m8
 	float halfdistanceheight;
 	public string setstate;
 	public bool hitfromleft;
 	Animator anim;	
+	float slipsforce = 9;
 	public bool grounded;
 	[SerializeField] LayerMask whatIsGround;	
 	float move;
@@ -30,6 +35,8 @@ public class PlayerScript : MonoBehaviour {
 	float rollforce = 2600f;
 	float Comboforce = 50;
 	float DoubleComboforce = 100;
+	public bool SlipR;
+	public bool SlipL;
 	bool jump;
 	Rigidbody2D mybody;
 	bool _alive = true;
@@ -51,6 +58,8 @@ public class PlayerScript : MonoBehaviour {
 				CheckForImput();
 				break;
 			case State.Hit:
+				if (grounded)
+					mybody.velocity = (new Vector2(0,0));
 				if (hitfromleft)
 					mybody.AddForce(new Vector2(hitforce, hitforce));
 			else if (!hitfromleft)
@@ -96,6 +105,42 @@ public class PlayerScript : MonoBehaviour {
 				yield return new WaitForSeconds (0.5f);
 				_state = State.Normal;
 				break;
+			case State.SlipL:
+				// muh anim
+				nocontrol = true;
+				if (sliptime > 0){
+					sliptime-=Time.deltaTime;
+					mybody.transform.Translate(new Vector3 (-slipsforce*Time.deltaTime,0,0));
+				}
+				if (sliptime < 0)
+					sliptime = 0;
+				if (sliptime == 0){
+					//muh anim
+					nocontrol = false;
+					SlipL = false;
+					_state = State.Normal;
+				}
+				break;
+			case State.SlipR:
+				// muh anim
+				nocontrol = true;
+				if (sliptime > 0){
+					sliptime-=Time.deltaTime;
+					mybody.transform.Translate(new Vector3 (slipsforce*Time.deltaTime,0,0));
+				}
+				if (sliptime < 0)
+					sliptime = 0;
+				if (sliptime == 0){
+					//muh anim
+					SlipR = false;
+					nocontrol = false;
+					_state = State.Normal;
+				}
+				break;
+
+
+			
+
 			}
 			yield return null;
 		}
@@ -122,12 +167,18 @@ public class PlayerScript : MonoBehaviour {
 			_state = PlayerScript.State.Hit;
 		if (setstate == "Thrown")
 			_state = PlayerScript.State.Thrown;
+
+	
 	}
 
 	void Start () {
 	
 	}
 	void CheckForImput(){		
+		if (SlipL)
+			_state = State.SlipL;
+		if (SlipR)
+			_state = State.SlipR;
 		string input = GetComponent<PlayerAttackColliders>().Status4Mob;
 		bool imattacking = false;
 		if (input != "Deciding")
@@ -144,7 +195,7 @@ public class PlayerScript : MonoBehaviour {
 			_state = State.DoubleCombo;
 		if (grounded)
 			move = Input.GetAxis("Horizontal");
-		
+
 		if (Input.GetButtonDown("Jump")) 
 			jump = true;
 		if (move != 0 || jump || !nocontrol )
@@ -157,6 +208,7 @@ public class PlayerScript : MonoBehaviour {
 		if (muhflip){
 			muhflip = false;
 			Flip();
+
 		}
 
 	}

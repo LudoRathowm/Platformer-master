@@ -26,7 +26,7 @@ TagManager:
   User Layer 12: Background
   User Layer 13: Enemy
   User Layer 14: Parry
-  User Layer 15: 
+  User Layer 15: Projectile
   User Layer 16: 
   User Layer 17: 
   User Layer 18: 
@@ -44,13 +44,13 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
-  - name: Background
-    userID: 1
-    uniqueID: 1093696345
-    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: Background
+    userID: 1
+    uniqueID: 1093696345
     locked: 0
   - name: Characters
     userID: 3

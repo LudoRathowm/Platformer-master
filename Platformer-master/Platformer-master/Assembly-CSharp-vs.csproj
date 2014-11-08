@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AttackInputs.cs" />
+     <Compile Include="Assets\BirdAI.cs" />
+     <Compile Include="Assets\BirdAnus.cs" />
      <Compile Include="Assets\Bulleteffect.cs" />
      <Compile Include="Assets\CheckForObstacle.cs" />
      <Compile Include="Assets\CheckGround.cs" />
@@ -58,7 +60,9 @@
      <Compile Include="Assets\Gravity.cs" />
      <Compile Include="Assets\GravityControl.cs" />
      <Compile Include="Assets\GroundCheckRayCast.cs" />
+     <Compile Include="Assets\Groundpoop.cs" />
      <Compile Include="Assets\JellyAI.cs" />
+     <Compile Include="Assets\JellyFishAI.cs" />
      <Compile Include="Assets\JellySpitter.cs" />
      <Compile Include="Assets\JumpyEnemy.cs" />
      <Compile Include="Assets\KeyCombo.cs" />
@@ -68,6 +72,7 @@
      <Compile Include="Assets\PlayerAttackColliders.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
      <Compile Include="Assets\PlayerScript.cs" />
+     <Compile Include="Assets\Poopscript.cs" />
      <Compile Include="Assets\ProCore\Prototype\Scripts\RebuildMeshOnWake.cs" />
      <Compile Include="Assets\Respawner.cs" />
      <Compile Include="Assets\Rope2D.cs" />
